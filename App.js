@@ -2,9 +2,8 @@ import React, { useState } from 'react';
 import * as Font from 'expo-font';
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
-import Home from './screens/home';
-import ReviewDetails from './screens/reviewDetails';
 import AppLoading from 'expo-app-loading';
+import routes from './routes/routes';
 
 // get the Navigator and Screen component from the Stack Navigator
 
@@ -25,8 +24,9 @@ export default function App() {
   if (fontsLoaded) 
     returnElement = <NavigationContainer>
                       <Navigator initialRouteName="Home">
-                        <Screen name="Home" component={Home} />
-                        <Screen name="Review Details" component={ReviewDetails} />
+                        {
+                          routes.map((route, index) => <Screen key={index} {...route} />)
+                        }
                       </Navigator>
                     </NavigationContainer>
   return returnElement;

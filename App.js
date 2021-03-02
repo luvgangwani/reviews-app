@@ -23,9 +23,9 @@ export default function App() {
 
   if (fontsLoaded) 
     returnElement = <NavigationContainer>
-                      <Navigator initialRouteName="Home">
+                      <Navigator initialRouteName="Home" screenOptions= {{ headerStyle: { backgroundColor: '#184e77' }, headerTitleStyle: { fontFamily: 'raleway-light' }}}>
                         {
-                          routes.map((route, index) => <Screen key={index} {...route} />)
+                          routes.map((route, index) => <Screen key={index} {...route} options={{ headerTintColor: '#ffffff' }} />)
                         }
                       </Navigator>
                     </NavigationContainer>

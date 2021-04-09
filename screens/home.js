@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View, Modal, StyleSheet } from 'react-native';
 import Card from '../shared/card';
 import globalStyles from '../styles/global';
+import { MaterialIcons } from "@expo/vector-icons";
 
 export default function Home({ navigation }) {
-
+    const [modalToggle, setModalToggle] = useState(false);
     const [reviews, setReviews] = useState([
         {title: 'Fast and Furious' , rating: '2', body: 'Lorem ipsum', key: '1'},
         {title: '2 Fast 2 Furious' , rating: '5', body: 'Lorem ipsum', key: '2'},
@@ -14,6 +15,11 @@ export default function Home({ navigation }) {
 
     return (
         <View style={globalStyles.container}>
+            <Modal animationType='slide' visible={modalToggle} style={styles.modalContent}>
+                <MaterialIcons name="close" size={24} style={styles.icon} onPress={() => setModalToggle(false)} />
+                <Text>Modal content.</Text>
+            </Modal>
+            <MaterialIcons name="add" size={24} style={styles.icon} onPress={() => setModalToggle(true)} />
             <FlatList
                 data={reviews}
                 renderItem={({ item }) => (
@@ -27,3 +33,18 @@ export default function Home({ navigation }) {
         </View>
     );
 };
+
+const styles = StyleSheet.create({
+    icon: {
+        marginTop: 20,
+        marginBottom: 20,
+        borderWidth: 1,
+        borderColor: '#184e77',
+        borderRadius: 5,
+        padding: 10,
+        alignSelf: 'center',
+    },
+    modalContent: {
+        flex: 1,
+    }
+})

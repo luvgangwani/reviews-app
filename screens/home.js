@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { FlatList, Text, TouchableOpacity, View, Modal, StyleSheet } from 'react-native';
+import { FlatList, Text, TouchableOpacity, View, Modal, StyleSheet, TouchableWithoutFeedback, Keyboard } from 'react-native';
 import Card from '../shared/card';
 import globalStyles from '../styles/global';
 import { MaterialIcons } from "@expo/vector-icons";
@@ -14,11 +14,23 @@ export default function Home({ navigation }) {
         {title: 'Fast and Furious 4' , rating: '4', body: 'Lorem ipsum', key: '4'},
     ]);
 
+    const addReview = (review) => {
+        review.key = Math.random().toString();
+        setReviews((currentReviewes) => {
+            return [review, ...currentReviewes];
+        });
+        setModalToggle(false);
+    };
+
     return (
         <View style={globalStyles.container}>
-            <Modal animationType='slide' visible={modalToggle} style={styles.modalContent}>
-                <MaterialIcons name="close" size={24} style={styles.icon} onPress={() => setModalToggle(false)} />
-                <ReviewForm />
+            <Modal animationType='slide' visible={modalToggle}>
+                <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+                    <View style={styles.modalContent}>
+                        <MaterialIcons name="close" size={24} style={styles.icon} onPress={() => setModalToggle(false)} />
+                        <ReviewForm onFormSubmit={addReview} />
+                    </View>
+                </TouchableWithoutFeedback>
             </Modal>
             <MaterialIcons name="add" size={24} style={styles.icon} onPress={() => setModalToggle(true)} />
             <FlatList

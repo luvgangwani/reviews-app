@@ -3,6 +3,7 @@ import { FlatList, Text, TouchableOpacity, View, Modal, StyleSheet } from 'react
 import Card from '../shared/card';
 import globalStyles from '../styles/global';
 import { MaterialIcons } from "@expo/vector-icons";
+import ReviewForm from './reviewForm';
 
 export default function Home({ navigation }) {
     const [modalToggle, setModalToggle] = useState(false);
@@ -17,7 +18,7 @@ export default function Home({ navigation }) {
         <View style={globalStyles.container}>
             <Modal animationType='slide' visible={modalToggle} style={styles.modalContent}>
                 <MaterialIcons name="close" size={24} style={styles.icon} onPress={() => setModalToggle(false)} />
-                <Text>Modal content.</Text>
+                <ReviewForm />
             </Modal>
             <MaterialIcons name="add" size={24} style={styles.icon} onPress={() => setModalToggle(true)} />
             <FlatList

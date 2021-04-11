@@ -3,6 +3,7 @@ import { View, Text, TextInput, Button } from 'react-native';
 import globalStyles from '../styles/global';
 import { Formik } from "formik";
 import * as yup from "yup";
+import FlatButton from '../shared/button';
 
 const { object, string } = yup;
 
@@ -69,9 +70,8 @@ export default function ReviewForm({ onFormSubmit }) {
                                 onBlur={handleBlur('rating')}
                             />
                             <Text style={errorText}>{touched.rating && errors.rating}</Text>
-                            <Button
-                                title='Submit'
-                                color='#184e77'
+                            <FlatButton
+                                text='Submit'
                                 onPress={handleSubmit}
                             />
                         </View>

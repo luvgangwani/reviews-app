@@ -13,11 +13,16 @@ const globalStyles = StyleSheet.create({
         lineHeight: 20,
     },
     input: {
-        margin: 10,
         padding: 10,
         borderWidth: 1,
         borderColor: '#184e77',
         borderRadius: 5,
+    },
+    errorText: {
+        margin: 10,
+        color: '#e63946',
+        fontWeight: 'bold',
+        alignSelf: 'center',
     }
 });
 

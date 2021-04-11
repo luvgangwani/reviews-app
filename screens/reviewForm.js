@@ -29,7 +29,7 @@ export default function ReviewForm({ onFormSubmit }) {
         rating: '',
     };
 
-    const { container, input } = globalStyles;
+    const { container, input, errorText } = globalStyles;
     return (
         <View style={container}>
             <Formik
@@ -41,28 +41,34 @@ export default function ReviewForm({ onFormSubmit }) {
             }}
             >
                 {
-                    ({ handleChange, handleSubmit, values }) => (
+                    ({ handleChange, handleSubmit, handleBlur, values, errors, touched }) => (
                         <View>
                             <TextInput
                                 style={input}
                                 placeholder="Review title"
                                 onChangeText={handleChange('title')}
                                 value={values.title}
+                                onBlur={handleBlur('title')}
                             />
+                            <Text style={errorText}>{touched.title && errors.title}</Text>
                             <TextInput
                                 multiline
                                 style={input}
                                 placeholder="Review body"
                                 onChangeText={handleChange('body')}
                                 value={values.body}
+                                onBlur={handleBlur('body')}
                             />
+                            <Text style={errorText}>{touched.body && errors.body}</Text>
                             <TextInput
                                 style={input}
                                 placeholder="Rating"
                                 onChangeText={handleChange('rating')}
                                 value={values.rating}
                                 keyboardType="numeric"
+                                onBlur={handleBlur('rating')}
                             />
+                            <Text style={errorText}>{touched.rating && errors.rating}</Text>
                             <Button
                                 title='Submit'
                                 color='#184e77'
